@@ -8,8 +8,8 @@ RUN apt-get update && \
 
 WORKDIR /opt/build
 
-COPY main.cpp /opt/build
+COPY CMakeLists.txt main.cpp /opt/build
 
-RUN  g++ -o a.out main.cpp
+RUN mkdir build;cd build; cmake -S ../ -B .; make
 
-CMD ["./a.out"]
+CMD ["build/hello"]
