@@ -1,15 +1,6 @@
-FROM ubuntu as dcpp
+FROM alpine:3.7
 
-ENV DEBIAN_FRONTEND "noninteractive"
 
-RUN apt-get update && \
-	apt-get install -y --no-install-recommends \
-	build-essential make cmake
-
-WORKDIR /opt/build
-
-COPY CMakeLists.txt main.cpp /opt/build
-
-RUN mkdir build;cd build; cmake -S ../ -B .; make
-
-CMD ["build/hello"]
+RUN apk add --update gcc g++ clang gdb cmake make ninja \
+	autoconf automake dos2unix tar rsync python3  \
+	&& rm -rf /tmp/* /var/cache/apk/*
